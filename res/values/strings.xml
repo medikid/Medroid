@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Medroid</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_medroid">Medroid</string>
+    <string name="title_activity_user_login">UserLogin</string>
+    <string name="title_activity_user_reg">UserReg</string>
+    <string name="title_activity_user_dashboard">UserDashboard</string>
+    <string name="title_activity_mcq_view">MCQ_View</string>
+
+</resources>
