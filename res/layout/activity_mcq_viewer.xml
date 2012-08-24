@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<!-- Include Action Bar for activity-->
+ <include layout="@layout/mcq_viewer_toolbar" />
+ 
+     <TextView
+         android:id="@+id/tvQuestionText"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginLeft="68dp"
+         android:layout_marginTop="38dp"
+         android:text="Question Text"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RadioGroup
+        android:id="@+id/rdoGrpChoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvQuestionText"
+        android:layout_marginTop="36dp" >
+
+        <RadioButton
+            android:id="@+id/rdoChoiceA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/prefix_choice_a" />
+
+        <RadioButton
+            android:id="@+id/rdoChoiceB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prefix_choice_b" />
+
+        <RadioButton
+            android:id="@+id/rdoChoiceC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prefix_choice_c" />
+
+        <RadioButton
+            android:id="@+id/rdoChoiceD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prefix_choice_d" />
+
+        <RadioButton
+            android:id="@+id/rdoChoiceE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prefix_choice_e" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rdoGrpChoices" >
+
+        <Button
+            android:id="@+id/btnSubmitAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/btnSubmitAnswer" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_marginLeft="41dp" >
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/btnNext" />
+
+        <Button
+            android:id="@+id/btnStartStop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="31dp"
+            android:layout_toLeftOf="@+id/btnNext"
+            android:text="@string/btnStartStop" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:text="@string/btnPrev" />
+
+</RelativeLayout>
+
+

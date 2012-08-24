@@ -1,0 +1,50 @@
+<!-- Your package folder -->
+<com.meditrainer.medroid.ui.DashboardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:background="#f8f9fe" >
+    <!--  Start Test Button -->
+    <Button
+        android:id="@+id/btn_start_test"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/btn_start_test"
+        android:text="Start Test" />
+ 
+    <!--  Test Profile Button -->
+    <Button
+        android:id="@+id/btn_test_profile"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/btn_test_profile"
+        android:text="Test Profile" />
+ 
+    <!--  User Profile Button -->
+    <Button
+        android:id="@+id/btn_user_profile"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/btn_user_profile"
+        android:text="User Profile" />
+ 
+    <!--  Perf Analysis Button -->
+    <Button
+        android:id="@+id/btn_perf_analysis"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/btn_perf_analysis"
+        android:text="Performance Analysis" />
+ 
+    <!--  Buy Subscription Button -->
+    <Button
+        android:id="@+id/btn_buy_subscription"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/btn_buy_subscription"
+        android:text="Buy Subscriptions" />
+ 
+    <!--  Newsfeed Button -->
+    <Button
+        android:id="@+id/btn_newsfeed"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/btn_newsfeed"
+        android:text="Newsfeeds" />
+ 
+</com.meditrainer.medroid.ui.DashboardLayout>

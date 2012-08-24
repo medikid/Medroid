@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8f9fe"
+    android:orientation="vertical" >
+
+    <!-- Include Action Bar for activity -->
+
+    <include layout="@layout/actionbar_activity" />
+
+    <TextView
+        android:id="@+id/lbl_UID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_UID"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/et_UID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="123" />
+
+    <TextView
+        android:id="@+id/lbl_QSID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_QSID"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/et_QSID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="123456" />
+
+    <TextView
+        android:id="@+id/lbl_sample_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_sample_max"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/et_qtot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="200" />
+
+    <Button
+        android:id="@+id/btn_start_test_now"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/start_test_now"
+        android:clickable="true" />
+
+</LinearLayout>

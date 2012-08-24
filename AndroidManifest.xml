@@ -4,7 +4,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="15" />
 
     <application
@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.Medroid"
+            android:name=".ui.Medroid"
             android:label="@string/title_activity_medroid" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,36 +20,78 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.UserLogin"
-            android:label="@string/title_activity_user_login" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- User Dashboard Activity -->
         <activity
-            android:name=".activity.UserRegister"
-            android:label="@string/title_activity_user_reg" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.UserDashboard"
+            android:name=".ui.UserDashboardActivity"
             android:label="@string/title_activity_user_dashboard" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <!-- User Login Activity -->
+        <activity
+            android:name=".ui.UserLoginActivity"
+            android:label="@string/title_activity_user_login" >
+        </activity>
+
+        <!-- User Reg Activity -->
+        <activity
+            android:name=".ui.UserRegisterActivity"
+            android:label="@string/title_activity_user_reg" >
+        </activity>
+
+        <!-- MCQ Viewer Activity -->
+        <activity
+            android:name=".ui.MCQViewerActivity"
+            android:label="@string/title_activity_mcq_viewer" >
+        </activity>
+        <!-- QS Question Viewer Activity -->
+        <activity
+            android:name=".ui.QuestionSheetActivity"
+            android:label="@string/title_activity_qs_nav_list" >
+        </activity>
+
+        <!-- Start Test Activity -->
+        <activity
+            android:name=".ui.StartTestActivity"
+            android:label="@string/title_activity_start_test" >
+        </activity>
+
+        <!-- Test Profile Activity -->
+        <activity
+            android:name=".ui.TestProfileActivity"
+            android:label="@string/title_activity_test_profile" >
+        </activity>
+
+        <!-- User Profile Activity -->
+        <activity
+            android:name=".ui.UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+
+        <!-- Performance Analysis Activity -->
+        <activity
+            android:name=".ui.PerfAnalysisActivity"
+            android:label="@string/title_activity_perf_analysis" >
+        </activity>
+
+        <!-- BuySubscription Activity -->
+        <activity
+            android:name=".ui.BuySubscriptionActivity"
+            android:label="@string/title_activity_buy_subscription" >
+        </activity>
+
+        <!-- Newsfeed Activity -->
+        <activity
+            android:name=".ui.NewsfeedActivity"
+            android:label="@string/title_activity_newsfeed" >
         </activity>
         <activity
-            android:name=".activity.MCQView"
-            android:label="@string/title_activity_mcq_view" >
+            android:name=".ui.QSNavListActivity"
+            android:label="@string/title_activity_qs_nav_list" >
+        </activity>
+        <activity
+            android:name=".test.TestActivity"
+            android:label="@string/title_activity_test" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

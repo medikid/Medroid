@@ -1,0 +1,11 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ActionBarCompat" >
+
+    <Button
+        android:id="@+id/btn_dashboard_home"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00"
+        android:background="@drawable/dashboard_home" />
+
+</LinearLayout>
