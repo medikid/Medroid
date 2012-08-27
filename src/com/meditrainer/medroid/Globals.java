@@ -4,6 +4,7 @@ public class Globals {
 	public class System{
 		public static final String TAG = "Meditrainer App";
 		public static final String iTAG = "App Activity";
+		public static final String imTAG = "App Misc Activity";
 	}
 	
 	public class App{

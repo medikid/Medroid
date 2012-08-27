@@ -30,6 +30,7 @@ import com.meditrainer.medroid.dataprovider.QSDataProvider;
 import com.meditrainer.medroid.storage.iStorage;
 import com.meditrainer.medroid.storage.iStorageQSNavList;
 import com.meditrainer.medroid.storage.iStorageMCQs;
+import com.meditrainer.medroid.ui.StartTestActivity;
 import com.meditrainer.medroid.userdata.UserSession;
 import com.meditrainer.medroid.util.Logger;
 import com.meditrainer.medroid.util.JSONHandler;
@@ -74,23 +75,21 @@ public class TestActivity extends Activity implements OnClickListener {
         return true;
     }
 
+     
+    
 	public void onClick(View v){
+	
 		UserSession.setUID(123);
 		UserSession.setQSID(123456);
-	 
-		String request = et_test.getText().toString();
-		int requestMCQ = Integer.parseInt(request);
-		MCQFeeder f = null;
-		MCQ m = null;
 		try {
-			MCQFeeder.loadMCQBundleByQNo(getApplicationContext(), requestMCQ);
-			m = MCQFeeder.getMCQ(getApplicationContext(), requestMCQ);
+			DummyData.createDummyQSNavList(this, 123, 123456, 200);
+			DummyData.createDummmyMCQBundles(this, 123, 123456, 200);
+			Logger.i(" Successfully created Dummy QSNavList AND mcq BUNDLES ");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Logger.i(" CreateDummyTest exited with errors ");
 		}
-		
-		tv_test.setText(m.question_text);
+		Logger.toast(this, "Dummy data created");
 	 
 	}
 }

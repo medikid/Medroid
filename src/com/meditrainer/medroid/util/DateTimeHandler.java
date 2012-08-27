@@ -11,6 +11,7 @@ public abstract class DateTimeHandler {
 
 	
 	public static Date stringToDate(String timeString) throws ParseException {
+		Logger.varm(" String to Date conversion ", timeString);
 		Date dateObj = null;
 		TimeZone tz = TimeZone.getTimeZone("UTC");
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -20,6 +21,7 @@ public abstract class DateTimeHandler {
 	}
 
 	public static Time stringToTime(String timeHMSstr) {
+		Logger.varm(" String to Time conversion", timeHMSstr);
 
 		String[] timeStr = timeHMSstr.split(":");
 
@@ -32,22 +34,26 @@ public abstract class DateTimeHandler {
 	}
 
 	public static long stringToSeconds(String timeHMSstr) {
+		Logger.varm(" String to Seconds conversion", timeHMSstr);
 		Time tm = stringToTime(timeHMSstr);
 		long timeInSeconds = tm.toMillis(false) / 1000;
 		return timeInSeconds;
 	}
 	
 	public static long secondsToMillis(long timeInSec){
+		Logger.varm(" Seconds to Milliseconds conversion ", timeInSec);
 		long timeInMillis = timeInSec * 1000;
 		return timeInMillis;
 	}
 	
 	public static long millisToSec(long timeInMillis){
+		Logger.varm(" millisToSec ", timeInMillis);
 		long timeInSec = timeInMillis / 1000;
 		return timeInSec;
 	}
 	
 	public static String getTimeInHMSstring(long timeInMillis){
+		Logger.varm(" Get time in HMS String ", timeInMillis);
 		TimeZone tz = TimeZone.getTimeZone("UTC");
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		sdf.setTimeZone(tz);

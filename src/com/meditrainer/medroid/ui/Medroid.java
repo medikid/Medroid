@@ -21,7 +21,7 @@ public class Medroid extends Activity {
         setContentView(R.layout.activity_medroid);
         Logger.i("App Launched");
         
-        Intent i = new Intent(getApplicationContext(), StartTestActivity.class );
+        Intent i = new Intent(getApplicationContext(), UserDashboardActivity.class );
         startActivity(i);
         Logger.i("Started new Activity inside Medroid file");
         

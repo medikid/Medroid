@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class StartTestActivity extends Activity implements OnClickListener {
 	
 	Button btnStartTestNow, btnDashboardHome;
-	EditText et_UID, et_QSID, et_qtot; 
+	EditText et_UID, et_QSID, et_qTot; 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,17 +42,28 @@ public class StartTestActivity extends Activity implements OnClickListener {
          btnDashboardHome =(Button) findViewById(R.id.btn_dashboard_home);
          btnDashboardHome.setOnClickListener(this);
          Logger.i("Set On Click Listener for Dashboard Home Button");
+         
+         et_UID = (EditText) findViewById(R.id.et_UID);
+         et_QSID = (EditText) findViewById(R.id.et_QSID);
+         et_qTot = (EditText) findViewById(R.id.et_qtot);
+         
     }
     
     public void createDummyTest(){
     	Logger.i("Request for Creating Dummy Test");
+    	   	
+    	String sUID = et_UID.getText().toString();
+    	String sQSID = et_QSID.getText().toString();
+    	String sQTot = et_qTot.getText().toString();
     	
-    	int UID = Integer.parseInt(et_UID.getText().toString());
-		int QSID = Integer.parseInt(et_QSID.getText().toString());
-		int qTot = Integer.parseInt(et_qtot.getText().toString());
+    	
+    	int UID = Integer.parseInt(sUID);
+		int QSID = Integer.parseInt(sQSID);
+		int qTot = Integer.parseInt(sQTot);		
 		
 		UserSession.setUID(UID);
 		UserSession.setQSID(QSID);
+		
 		try {
 			DummyData.createDummyQSNavList(this, UID, QSID, qTot);
 			DummyData.createDummmyMCQBundles(this, UID, QSID, qTot);
@@ -71,7 +82,7 @@ public class StartTestActivity extends Activity implements OnClickListener {
 		switch(v.getId()){
 		case R.id.btn_start_test_now:
 			Logger.i("Start Test Now button Clicked ");
-			//createDummyTest();
+			createDummyTest();
 			break;
 		case R.id.btn_dashboard_home:
 			Logger.i("Dashboard Home button Clicked ");

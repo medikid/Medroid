@@ -28,6 +28,7 @@ public class MCQLoader {
 	}
 	
 	public static MCQ Load(Context context, int qNO) throws IOException {
+		MCQFeeder.loadMCQBundleByQNo(context, qNO);
 		MCQ RequestedMCQ = MCQFeeder.getMCQ(context, qNO);
 		return RequestedMCQ;		
 	}

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.meditrainer.medroid.util.Logger;
+
 import android.content.Context;
 /*
  * Handles internal storage read and write functions
@@ -70,6 +72,7 @@ public class iStorage {
 		return file.isFile();
 	}
 	
+	//will only delete empty contents, use deleteFolderContents()
 	protected static void deleteFolder(Context context, File dir){
 		if (dir.isDirectory()) {
 	        String[] children = dir.list();
@@ -77,10 +80,38 @@ public class iStorage {
 	            new File(dir, children[i]).delete();
 	        }
 	    }
-
 	}
-	protected static void deleteFile(Context context, File file){
+	public static void deleteFile(Context context, File file){
 		file.delete();
+	}
+	
+	public void deleteFolderContents(File dir) {
+		File homeDir = dir;
+		Logger.i("Request to delete folder contents of :" + dir.getAbsolutePath().toString());
+		
+		if (dir.isDirectory()) {
+			String[] children = dir.list();
+			if (children.length > 0) {
+				for (int i = 0; i < children.length; i++) {
+					File f = new File(dir, children[i]);
+					if (f.isDirectory()) {
+						deleteFolderContents(f);
+						Logger.i("Going into subfolder - " + f.getAbsolutePath().toString());
+					} else if (f.isFile()) {
+						f.delete();
+						Logger.i("Deleted File- " + f.getAbsolutePath().toString());
+					}
+					f.delete();
+				}
+			} else {
+				dir.delete();
+				Logger.i("Deleted File: " + dir.getAbsolutePath().toString());
+			}
+		} else if (dir.isFile()) {
+			dir.delete();
+			Logger.i("\n Deleted File: " + dir.getAbsolutePath().toString());
+		}
+		homeDir.delete();
 	}
 	
 	protected static void addFileContent(Context context, File file, String fileContent) throws IOException{

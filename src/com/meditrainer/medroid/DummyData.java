@@ -60,7 +60,7 @@ public class DummyData {
 	}
 	
 	public static void createDummyQSNavList(Context context, int UID, int QSID, int MaxQuestions) throws IOException{
-		Logger.i("Dummy QSNavList created");
+		Logger.i("Dummy QSNavList create Request for UID: " + String.valueOf(UID) +"QSID: "+String.valueOf(QSID) +"qTot: "+String.valueOf(MaxQuestions)+"");
 		UserSession.setUID(UID);
 		UserSession.setQSID(QSID);
 		ArrayList<Question> dummyNavList = new ArrayList<Question>();
@@ -76,8 +76,7 @@ public class DummyData {
 	}
    
 	public static void createDummmyMCQBundles(Context context, int UID, int QSID, int MaxQuestions) throws IOException{
-		
-		Logger.i("Dummy MCQ Bundle created ");
+		Logger.i("Dummy QSNavList create Request for UID: " + String.valueOf(UID) +"QSID: "+String.valueOf(QSID) +"qTot: "+String.valueOf(MaxQuestions)+"");
 		UserSession.setUID(UID);
 		UserSession.setQSID(QSID);
 		int i;

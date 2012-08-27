@@ -6,13 +6,12 @@ import com.meditrainer.medroid.DummyData;
 import com.meditrainer.medroid.R;
 import com.meditrainer.medroid.R.layout;
 import com.meditrainer.medroid.R.menu;
-import com.meditrainer.medroid.content.CurrentQNo;
-import com.meditrainer.medroid.content.CurrentQNo.CurrentQNoChangeListener;
 import com.meditrainer.medroid.content.MCQ;
 import com.meditrainer.medroid.content.Question;
 import com.meditrainer.medroid.dataprovider.MCQFeeder;
 import com.meditrainer.medroid.dataprovider.MCQLoader;
 import com.meditrainer.medroid.ui.QSNavListFragment.OnQuestionSelectedListener;
+import com.meditrainer.medroid.util.Logger;
 import com.meditrainer.medroid.util.Timer;
 
 import android.os.Bundle;
@@ -34,19 +33,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class QuestionViewerFragment extends Fragment implements OnCheckedChangeListener, OnClickListener, CurrentQNoChangeListener {
-
-	TextView tvQuestionText;
-	RadioGroup rdoGrpChoices;
-	RadioButton rdoChoiceA, rdoChoiceB, rdoChoiceC, rdoChoiceD, rdoChoiceE, rdoBtnSelected;
-	Button btnSubmitAnswer, btnNext, btnPrev, btnStartStop;
-	int mcqQno, mcqQid, LoadedMCQRepoId;
-	String mcqChoiceSelected = "";
-	MCQ mMCQ;
-	Timer MCQTimer;
-	View v;
-	OnQuestionSelectedListener mListener;
-	CurrentQNo currentQNo = new CurrentQNo();
+public class QuestionViewerFragment extends Fragment implements OnCheckedChangeListener, OnClickListener {
+	public  TextView tvQuestionText;
+	public RadioGroup rdoGrpChoices;
+	public RadioButton rdoChoiceA, rdoChoiceB, rdoChoiceC, rdoChoiceD, rdoChoiceE, rdoBtnSelected;
+	public Button btnSubmitAnswer, btnNext, btnPrev, btnStartStop;
+	public int mcqQno, mcqQid, LoadedMCQRepoId;
+	public String mcqChoiceSelected = "";
+	private MCQ mMCQ;
+	public Timer MCQTimer;
+	public View v;
+	OnCurrentQNoChangeListener mListener;
+	private int currentQNo, lastQNo;
 	MCQLoader loader;
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -64,7 +62,6 @@ public class QuestionViewerFragment extends Fragment implements OnCheckedChangeL
         btnNext.setOnClickListener(this);
         btnPrev.setOnClickListener(this);
         btnStartStop.setOnClickListener(this);
-        currentQNo.setCurrentQNoChangeListener(this);
         
       this.setContent(setDummyContent()) ;    
       MCQTimer.start("00:01:30");
@@ -72,6 +69,17 @@ public class QuestionViewerFragment extends Fragment implements OnCheckedChangeL
       
       return v;
     }
+    
+    @Override
+	 public void onAttach(Activity activity) {
+	        super.onAttach(activity);
+	        try {
+	            mListener = (OnCurrentQNoChangeListener) activity;
+	        } catch (ClassCastException e) {
+	            throw new ClassCastException(activity.toString() + " must implement OnCurrentQNoChangedListener");
+	        }        
+	        
+	    }
     
     public MCQ setDummyContent(){
     	MCQ dummyMCQ = new MCQ(1);
@@ -142,9 +150,29 @@ public class QuestionViewerFragment extends Fragment implements OnCheckedChangeL
 		
 	}
 
-	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
-		Button clickedButton = (Button) arg0;
+	public void onClick(View v) {
+		int clickedButtonId = v.getId();
+		
+		switch (clickedButtonId){
+		case R.id.btnSubmitAnswer:
+			Logger.i("Submt Answer button clicked");
+			break;
+		case R.id.btnNext:
+			Logger.i("Next button clicked");
+			getNextQ();
+			break;
+		case R.id.btnPrev:
+			Logger.i("Prev button clicked");
+			getPrevQ();
+			break;
+		case R.id.btnStartStop:
+			Logger.i("StartStop button clicked");
+			break;	
+		
+		}
+		
+		/*
+		  clickedButton = (Button) arg0;
 		
 		String $validation_feedback="";
 		if (validateAnswerSubmitted() == true){
@@ -153,9 +181,38 @@ public class QuestionViewerFragment extends Fragment implements OnCheckedChangeL
 		
 		Toast.makeText(getActivity(), "You selected answer "+mcqChoiceSelected+". "+$validation_feedback, 6000).show();
 		Log.i("AppActivity", $validation_feedback);
+		*/
+	}
+	
+	public void setCurrentQNo(int newQNo){		
+		if (currentQNo != newQNo){
+			Logger.i("Request to set Current QNo on the Question Viewer to" + String.valueOf(newQNo) );
+			
+			this.lastQNo = this.currentQNo;
+			this.currentQNo = newQNo;
+			mListener.onCurrentQNoChanged(newQNo);	
+			
+			loadMCQ(); //loads content into mMCQ
+			setContent(mMCQ);		
+		}		
+		
+	}
+	
+	public void getNextQ(){
+		Logger.i(" Next Question requested ");
+		int nextQNo = currentQNo + 1;
+		setCurrentQNo(nextQNo);
+	}
+	
+	public void getPrevQ(){
+		Logger.i(" Prev Question requested ");
+
+		int prevQNo = currentQNo - 1;
+		setCurrentQNo(prevQNo);
 	}
 	
 	public void setAnswerSelected(){
+		Logger.i(" Set answer(string) Selected from the radio button checked");
 		if(rdoBtnSelected.getId() == rdoChoiceA.getId()){
 			this.mcqChoiceSelected = "a";
 		} else if (rdoBtnSelected.getId() == rdoChoiceB.getId()){
@@ -170,6 +227,7 @@ public class QuestionViewerFragment extends Fragment implements OnCheckedChangeL
 	}
 	
 	public Boolean validateAnswerSubmitted(){
+		Logger.i("Validate Answer Submitted");
 		Boolean answer_validation = false;
 		if (this.mcqChoiceSelected == this.mMCQ.answer){
 			answer_validation = true;
@@ -177,28 +235,57 @@ public class QuestionViewerFragment extends Fragment implements OnCheckedChangeL
 		return answer_validation;
 	}
 	
-	public void getNextQ(){
-		currentQNo.NextQ();
-	}
-	
-	public void getPrevQ(){
-		currentQNo.PrevQ();
-	}
-
-	public void onCurrentQNoChanged(int newQNo){
-		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), "CurrentQNOchange lisener working", Toast.LENGTH_LONG).show();
-		MCQ m = null;
+	//loads MCQ by currentQNO from the MCQ feeder
+	public void loadMCQ(){
+		int QNo = currentQNo;
+		mMCQ = null;
+		
 		try {
-		MCQFeeder.loadMCQBundleByQNo(getActivity().getApplicationContext(), newQNo);
-		m = MCQFeeder.getMCQ(getActivity().getApplicationContext(), newQNo);
+		mMCQ = loader.Load(getActivity().getApplicationContext(), QNo);
 		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		setContent(m);
-		
+		}		
 	}
+
+/***********************************Listener for MCQ Selection*********************************/
+/*
+	public class CurrentQNo {
+	
+	int mQNo;
+	private OnCurrentQNoChangeListener mListener;
+	
+	public CurrentQNo(){
+		mQNo = 1;
+	}
+	
+	public void set(int QNo){
+		mQNo = QNo;
+		if (mListener != null){
+			mListener.onCurrentQNoChanged(mQNo);
+		}
+	}
+	
+	public int get(){
+		return mQNo;
+	}
+	
+	public void NextQ(){
+		set(mQNo + 1);
+	}
+	
+	public void PrevQ(){
+		set(mQNo - 1);
+	}
+	*/
+	public void setCurrentQNoChangeListener(OnCurrentQNoChangeListener listener){
+		mListener = listener;
+	}
+	
+	public static interface OnCurrentQNoChangeListener{
+		
+		void onCurrentQNoChanged(int newQNo);
+	}
+
 
 }

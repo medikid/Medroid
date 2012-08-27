@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import com.meditrainer.medroid.*;
 
+/*
+ * Handles MCQ TImer
+ */
 public class Timer extends TextView {
 
 	CountDownTimer counter;
@@ -31,17 +34,17 @@ public class Timer extends TextView {
 
 	public Timer(Context context) {
 		super(context);
-		viewContext = context;
+		viewContext = context; Logger.im(" Timer class is initialized ");
 	}
 
 	public Timer(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		viewContext = context;
+		viewContext = context; Logger.im(" Timer class is initialized ");
 	}
 
 	public Timer(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		viewContext = context;
+		viewContext = context; Logger.im(" Timer class is initialized ");
 	}
 
 	public void start(long startTimeInSec) {
@@ -50,13 +53,13 @@ public class Timer extends TextView {
 
 	public void start(String startTimeString) {
 		// logger
-		Logger.variable("startTimeString", startTimeString);
+		Logger.varm("startTimeString", startTimeString);
 
 		long timeInSec = DateTimeHandler.stringToSeconds(startTimeString);
 		startTimer(timeInSec);
 
 		// logger
-		Logger.variable("timeInSec", timeInSec);
+		Logger.varm("timeInSec", timeInSec);
 	}
 
 	public void setTime(long timeInMilliSec) {
@@ -68,7 +71,7 @@ public class Timer extends TextView {
 		startTimeInMilliSec = DateTimeHandler.secondsToMillis(startTimeInSec);
 
 		// logger
-		Logger.variable("startTimeInMilliSec", startTimeInMilliSec);
+		Logger.varm("startTimeInMilliSec", startTimeInMilliSec);
 
 		counter = new CountDownTimer(startTimeInMilliSec, 1000) {
 
@@ -76,7 +79,7 @@ public class Timer extends TextView {
 				timerOnTick(millisUntilFinished);
 
 				// logger
-				Logger.variable("millisUntilFinished", millisUntilFinished);
+				Logger.varm("millisUntilFinished", millisUntilFinished);
 
 			}
 
@@ -110,10 +113,12 @@ public class Timer extends TextView {
 	}
 
 	public void timerOnFinish() {
+		Logger.im(" Timer On Finish executed ");
 		setText("Done!");
 	}
 
 	public String getTimeLeft() {
+		Logger.im(" Get Time Left requested ");
 		String timeLeft = (String) this.getText();
 		return timeLeft;
 	}
@@ -123,6 +128,7 @@ public class Timer extends TextView {
 	}
 
 	protected void alertbox(String title, String mymessage) {
+		Logger.im("Timer Alert box is displayed ");
 
 		new AlertDialog.Builder(viewContext).setMessage(mymessage)
 				.setTitle(title).setCancelable(true)
@@ -133,17 +139,19 @@ public class Timer extends TextView {
 				}).show();
 	}
 
-	public void setAlarmTime(String reminderInterval, String finalRemainder,
-			String blinkerStartTime) {
+	public void setAlarmTime(String reminderInterval, String finalRemainder, String blinkerStartTime) {
+		Logger.im(" Alarm Time is set ");
 		timerAlarm = new TimerAlarm(reminderInterval, finalRemainder,
 				blinkerStartTime);
 	}
 
 	public void setToastRemainder(String str) {
+		Logger.im(" Toast Reminder is displayed ");
 		Toast.makeText(viewContext, str, Toast.LENGTH_LONG).show();
 	}
 
 	public void setBlinker() {
+		Logger.im(" Set blinker on requested ");
 		if (this.blinkerVar == 0) {
 			this.setBackgroundColor(Color.RED);
 			this.blinkerVar = 1;
